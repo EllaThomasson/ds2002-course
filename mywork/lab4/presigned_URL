@@ -1,0 +1,31 @@
+#!/Users/ellathomasson/anaconda3/bin/python
+
+
+# Defining Variables and importing: 
+import urllib.request
+import boto3
+url = 'https://m.media-amazon.com/images/I/81sMEvzsAxL.jpg'
+file_name = 'cat_image.jpg'
+local_file = 'cat_image.pg'
+bucket_name = 'ds2002-ztx5bd'
+expires_in = 604800
+
+# this should fetch and save a file from the internet
+urllib.request.urlretrieve(url,file_name)
+
+# this should upload the file to a bucket in S3
+s3 = boto3.client('s3', region_name = 'us-east-1') 
+with open(file_name, 'rb') as file:
+    response1 = s3.put_object(Body=file, Bucket=bucket_name, Key=file_name, ContentType='image/jpeg')
+
+# presign the file and print 
+response2 = s3.generate_presigned_url(
+    'get_object',
+    Params={'Bucket': bucket_name, 'Key': file_name},
+    ExpiresIn=expires_in
+    )
+print(response2)
+
+# here is the presigned URL
+#https://ds2002-ztx5bd.s3.amazonaws.com/cat_image.jpg?AWSAccessKeyId=ASIA3FLD5T6J62CFC25L&Signature=LFcDemgy%2Badlw1InavqYQE3Kyus%3D&x-amz-security-token=FwoGZXIvYXdzEAoaDN%2Bm53ny4oMn%2FRhiiiLEAWoAagorKGBFO%2FDDeyKnP1BMMkVoh5rbgvq8PiVfsjb1uWqEX747C59tSeaZW%2BaIeIP9knZlSODhf8DhpVplVyvvCIWSn7BvAsoicRMlTKnI6HyxeJtPaQpp6h80RQ20jtiJStDwdsc5V%2BalAdzE999LwIisr98hRJ57qfJmfY%2FdUe3%2F36ZnSlGrBLdRQ4XSM8HI7XV%2Bv6dnhHrjBxdaOyE1OsS9zpHaUCfaPc1OK%2FB3xu3KTI1U84uAErPjHoN4TUXgd8AoiPv5rgYyLaCcEo%2B%2BRWetzM9qdtH6raNSKRXh2KzBoxb6NKm%2BSzrnrgwVQK3Wxx%2FB8jLMGg%3D%3D&Expires=1709690647
+
