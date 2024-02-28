@@ -1,0 +1,6 @@
+curl https://i.pinimg.com/originals/71/28/3b/71283bb49db55cfee5bb6acd1389c465.jpg > tay
+aws s3 cp tay s3://ds2002-ztx5bd/tay
+aws s3 presign --expires-in 604800 s3://ds2002-ztx5bd/tay
+
+https://ds2002-ztx5bd.s3.us-east-1.amazonaws.com/tay?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIA3FLD5T6J62CFC25L%2F20240228%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240228T004313Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Security-Token=FwoGZXIvYXdzEAoaDN%2Bm53ny4oMn%2FRhiiiLEAWoAagorKGBFO%2FDDeyKnP1BMMkVoh5rbgvq8PiVfsjb1uWqEX747C59tSeaZW%2BaIeIP9knZlSODhf8DhpVplVyvvCIWSn7BvAsoicRMlTKnI6HyxeJtPaQpp6h80RQ20jtiJStDwdsc5V%2BalAdzE999LwIisr98hRJ57qfJmfY%2FdUe3%2F36ZnSlGrBLdRQ4XSM8HI7XV%2Bv6dnhHrjBxdaOyE1OsS9zpHaUCfaPc1OK%2FB3xu3KTI1U84uAErPjHoN4TUXgd8AoiPv5rgYyLaCcEo%2B%2BRWetzM9qdtH6raNSKRXh2KzBoxb6NKm%2BSzrnrgwVQK3Wxx%2FB8jLMGg%3D%3D&X-Amz-Signature=d145305e62f9f45e2c820353a26010c8edf3ac9df831d1fef1d395857918d2e5
+
